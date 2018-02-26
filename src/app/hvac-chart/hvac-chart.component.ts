@@ -16,7 +16,7 @@ import * as graph from '../graph';
 })
 export class HvacChartComponent implements OnInit {
 
-  dataPoints: DataPoint[];
+    dataPoints: DataPoint[];
 
     graphData: any = graph.graphData;
     graphOptions: any = graph.graphOptions;
@@ -36,6 +36,12 @@ export class HvacChartComponent implements OnInit {
         this.graphData.labels = this.dataPoints.map(dataPoint => dataPoint.time);
         this.graphData.datasets[0].data = this.dataPoints.map(dataPoint => dataPoint.temp);
         this.graphData.datasets[1].data = this.dataPoints.map(dataPoint => dataPoint.sp);
+        this.graphData.datasets[2].data = this.dataPoints.map(dataPoint => dataPoint.pi_heat);
+        this.graphData.datasets[3].data = this.dataPoints.map(dataPoint => dataPoint.pi_cool);
+        //this.graphData.datasets[4].data = this.dataPoints.map(dataPoint => dataPoint.pi_heat_2);
+        //this.graphData.datasets[5].data = this.dataPoints.map(dataPoint => dataPoint.pi_cool_2);
+        this.graphData.datasets[4].data = this.dataPoints.map(dataPoint => dataPoint.heat_act);
+        this.graphData.datasets[5].data = this.dataPoints.map(dataPoint => dataPoint.cool_act);
         this.hvacChart.update();
       });
   }
@@ -71,6 +77,10 @@ export class HvacChartComponent implements OnInit {
     this.graphData.labels.push(moment())
     this.graphData.datasets[0].data.push(data.temp)
     this.graphData.datasets[1].data.push(data.sp)
+    this.graphData.datasets[2].data.push(data.pi_heat)
+    this.graphData.datasets[3].data.push(data.pi_cool)
+    this.graphData.datasets[4].data.push(data.heat_act)
+    this.graphData.datasets[5].data.push(data.cool_act)
     this.hvacChart.update();
   }
 
@@ -88,6 +98,19 @@ export class HvacChartComponent implements OnInit {
         this.hvacChart.data.labels.push(moment().add(15 + this.cnt, 'minutes'))
         this.hvacChart.data.datasets[0].data.push(10)
         this.cnt ++;
+        this.hvacChart.update();
+      }
+
+      public onClear():void{
+
+          this.graphData.labels.splice(0,5);
+          this.graphData.datasets[0].data.splice(0,5);
+          this.graphData.datasets[1].data.splice(0,5);
+          this.graphData.datasets[2].data.splice(0,5);
+          this.graphData.datasets[3].data.splice(0,5);
+          this.graphData.datasets[4].data.splice(0,5);
+          this.graphData.datasets[5].data.splice(0,5);
+
         this.hvacChart.update();
       }
 

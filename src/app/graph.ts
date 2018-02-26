@@ -3,6 +3,8 @@ export const graphData = {
     datasets: [{
       label: "Temp",
       fill: false,
+      pointRadius: 0,
+      pointHitRadius: 5,
       backgroundColor: 'rgb(0, 180, 175)',
       borderColor: 'rgb(0, 180, 175)',
       //data: this.data
@@ -13,6 +15,8 @@ export const graphData = {
     },{
       label: "SP",
       fill: false,
+      pointRadius: 0,
+      pointHitRadius: 5,
       backgroundColor: 'rgb(0, 178, 117)',
       borderColor: 'rgb(0, 178, 117)',
       //data: this.data
@@ -21,8 +25,10 @@ export const graphData = {
       spanGaps: true,
       yAxisID: "y-axis-1",
     },{
-      label: "PI heat",
+      label: "heat",
       fill: false,
+      pointRadius: 0,
+      pointHitRadius: 5,
       backgroundColor: 'rgb(255, 99, 132)',
       borderColor: 'rgb(255, 99, 132)',
       //data: this.data
@@ -31,8 +37,10 @@ export const graphData = {
       spanGaps: true,
       yAxisID: "y-axis-2",
     },{
-      label: "PI cool",
+      label: "cool",
       fill: false,
+      pointRadius: 0,
+      pointHitRadius: 5,
       backgroundColor: 'rgb(0, 177, 228)',
       borderColor: 'rgb(0, 177, 228)',
       //data: this.data
@@ -40,6 +48,31 @@ export const graphData = {
       steppedLine: true,
       spanGaps: true,
       yAxisID: "y-axis-3",
+    },{
+      label: "heating active",
+      fill: false,
+      pointRadius: 0,
+      pointHitRadius: 5,
+      backgroundColor: 'rgb(255, 99, 132)',
+      borderColor: 'rgb(255, 99, 132)',
+      //data: this.data
+      data: [],    //here comes the data
+      steppedLine: true,
+      spanGaps: true,
+      yAxisID: "y-axis-4",
+    },{
+      label: "cooling active",
+      fill: false,
+      pointRadius: 0,
+      pointHitRadius: 5,
+      backgroundColor: 'rgb(0, 177, 228)',
+      borderColor: 'rgb(0, 177, 228)',
+      //data: this.data
+      data: [],    //here comes the data
+      steppedLine: true,
+      spanGaps: true,
+      yAxisID: "y-axis-4",
+
     },
 
   ]

@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 
 import { SocketService } from '../socket.service';
 import { ObservableMedia } from '@angular/flex-layout';
+import {FormControl, Validators} from '@angular/forms';
+//import { HvacChartComponent } from '../hvac-chart/hvac-chart.component';
+//import * as hvacChart from '../hvac-chart/hvac-chart.component';
 
 
 @Component({
@@ -10,6 +13,7 @@ import { ObservableMedia } from '@angular/flex-layout';
   styleUrls: ['./hvac-input.component.css']
 })
 export class HvacInputComponent implements OnInit {
+@Output() onClear = new EventEmitter();
 
   model = 1;
 
@@ -23,7 +27,22 @@ export class HvacInputComponent implements OnInit {
 
   temp = 20;
   sp = 21;
-  value = 'Clear me';
+  curSpMode: number;
+  curThMode: number;
+
+  modes = [
+    {id: 1, text: 'comfort'},
+    {id: 2, text: 'standby'},
+    {id: 3, text: 'economy'},
+    {id: 4, text: 'protect'},
+  ];
+
+  thermoModes = [
+    {id: 0, text: 'off'},
+    {id: 1, text: 'heating'},
+    {id: 2, text: 'cooling'},
+    {id: 3, text: 'auto'},
+  ];
 
 
 
@@ -40,16 +59,43 @@ export class HvacInputComponent implements OnInit {
     }
   }
 
-  favoriteSeason: string;
+    getUpdateDOM(): void {
+      this.socketService.getUpdateDOM()
+        .subscribe(data => {
+          //do something with the data
+          switch (data.id){
+            case 0:   //new temperature
+            break;
+            case 1:   //new setpoint
+              this.sp = data.inp;
+            break;
+            case 2:   //new SP mode
 
- seasons = [
-   'comfort',
-   'economy',
-   'standby',
-   'protect',
- ];
+            break;
+            case 3: //new thermo mode
+              this.curSpMode = data.inp;
+            break;
+            };
+        });
+    }
+
 
   ngOnInit() {
+    this.getUpdateDOM();    //through socket
   }
+
+  public onSpMode(): void{
+    console.log("sp mode: " + this.curSpMode);
+    this.sendMessage(this.curSpMode, 2);
+  };
+
+  public onThMode(): void{
+    console.log("th mode: " + this.curThMode);
+    this.sendMessage(this.curThMode, 3);
+  };
+  public clear():void {
+
+    };
+
 
 }

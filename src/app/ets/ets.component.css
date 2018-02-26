@@ -1,0 +1,16 @@
+@import url('https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css');
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group > * {
+  width: 20%;
+  padding-left: 30px;
+}
+
+h3 {
+  padding-top: 30pxform-group;
+  padding-left: 30px;
+}

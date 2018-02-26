@@ -19,17 +19,37 @@
       </mat-form-field>
     </form>
   </div>
-  <div>
+
 
     <div>
-      <mat-radio-group class="example-radio-group" [(ngModel)]="favoriteSeason">
-        <mat-radio-button class="example-radio-button" *ngFor="let season of seasons" [value]="season">
-          {{season}}
-        </mat-radio-button>
-      </mat-radio-group>
-      <div class="example-selected-value">Your favorite season is: {{favoriteSeason}}</div>
+      <mat-form-field>
+        <mat-select placeholder="select sp mode" [(ngModel)]="curSpMode" (change)="onSpMode()">
+          <mat-option *ngFor="let mode of modes" [value]=mode.id>
+            {{mode.text}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-select placeholder="select thermo mode" [(ngModel)]="curThMode" (change)="onThMode()">
+          <mat-option *ngFor="let mode of thermoModes" [value]=mode.id>
+            {{mode.text}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+
     </div>
-  </div>
+    <!--
+    <div>
+      <p> Selected sp value: {{curSpMode}} </p>
+      <p> Selected thermo value: {{curThMode}} </p>
+    </div>
+  -->
+
+
+
+
 
 
 </div>

@@ -52,13 +52,17 @@ import { AppRoutingModule }     from './app-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { DataService }      from './data.service';
 import { SocketService }      from './socket.service';
+import { EtsComponent } from './ets/ets.component';
+import { HvacChartOpsComponent } from './hvac-chart-ops/hvac-chart-ops.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HvacChartComponent,
     HvacInputComponent,
-    DashboardComponent
+    DashboardComponent,
+    EtsComponent,
+    HvacChartOpsComponent
   ],
   imports: [
     BrowserModule,
@@ -70,9 +74,9 @@ import { SocketService }      from './socket.service';
     FlexLayoutModule,
     BrowserAnimationsModule,
     MatButtonModule, MatCheckboxModule,MatRadioModule,MatIconModule,MatFormFieldModule,
-    ReactiveFormsModule, MatInputModule
+    ReactiveFormsModule, MatInputModule,MatSelectModule,
   ],
-  providers: [DataService, SocketService],
+  providers: [DataService, SocketService, ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

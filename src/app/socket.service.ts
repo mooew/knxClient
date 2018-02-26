@@ -13,13 +13,13 @@ export class SocketService {
   constructor() {
     this.socket = io(this.url);
   }
+////////////send////////////
 
-  public sendMessage(data) {
-        this.socket.emit('input_temp', data);
-  }
   public sendHVACMessage(data) {
         this.socket.emit('hvac-data', data);
   }
+
+////////////reseive////////////
 
   public getMessage = () => {
         return Observable.create((observer) => {
@@ -28,4 +28,13 @@ export class SocketService {
             });
         });
   }
+
+  public getUpdateDOM = () => {
+        return Observable.create((observer) => {
+            this.socket.on('updateInpDOM', (message) => {
+                observer.next(message);
+            });
+        });
+  }
+
 }
