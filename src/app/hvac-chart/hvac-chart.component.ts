@@ -101,17 +101,27 @@ export class HvacChartComponent implements OnInit {
         this.hvacChart.update();
       }
 
-      public onClear():void{
+      public onClear(id):void{
 
-          this.graphData.labels.splice(0,5);
-          this.graphData.datasets[0].data.splice(0,5);
-          this.graphData.datasets[1].data.splice(0,5);
-          this.graphData.datasets[2].data.splice(0,5);
-          this.graphData.datasets[3].data.splice(0,5);
-          this.graphData.datasets[4].data.splice(0,5);
-          this.graphData.datasets[5].data.splice(0,5);
+        switch(id){
+          case 1:
+            this.graphData.labels.splice(0,5);
+            this.graphData.datasets[0].data.splice(0,5);
+            this.graphData.datasets[1].data.splice(0,5);
+            this.graphData.datasets[2].data.splice(0,5);
+            this.graphData.datasets[3].data.splice(0,5);
+            this.graphData.datasets[4].data.splice(0,5);
+            this.graphData.datasets[5].data.splice(0,5);
 
-        this.hvacChart.update();
+            this.hvacChart.update();
+          break;
+          case 2:
+            alert("data is cleared after refresh");
+            this.socketService.sendHVACMessage({inp: null, id: 10});
+          break;
+
+        }
+
       }
 
 }

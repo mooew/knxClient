@@ -12,17 +12,20 @@ export class HvacChartOpsComponent implements OnInit {
 @Output() onClear = new EventEmitter();
   constructor() { }
 
+  id:any = 0;
   ngOnInit() {
   }
 
-  public clear():void {
-    this.onClear.emit(1);
+  public clear() {
+    this.id = 1;
+    this.onClear.emit(this.id);
     //hvacChart.data.labels.splice(0.5)
     //this.hvacChart.data.datasets[0].data.splice(0,5)
     //this.hvacChart.data.datasets[1].data.splice(0,5)
   }
-  public clearAll():void {
-    this.onClear.emit(2);
+  public clearAll() {
+    this.id = 2;
+    this.onClear.emit(this.id);
     //hvacChart.data.labels.splice(0.5)
     //this.hvacChart.data.datasets[0].data.splice(0,5)
     //this.hvacChart.data.datasets[1].data.splice(0,5)
