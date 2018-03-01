@@ -74,7 +74,7 @@ export class HvacChartComponent implements OnInit {
 
   updateCharts(data) {
     console.log(data);
-    this.graphData.labels.push(moment())
+    this.graphData.labels.push(data.time)
     this.graphData.datasets[0].data.push(data.temp)
     this.graphData.datasets[1].data.push(data.sp)
     this.graphData.datasets[2].data.push(data.pi_heat)
