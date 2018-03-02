@@ -7,8 +7,8 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class SocketService {
 
-  //private url = 'http://10.0.211.155:9000';
-  private url = 'http://localhost:9000';
+  private url = 'http://10.0.211.155:9000';
+  //private url = 'http://localhost:9000';
   private socket;
 
   constructor() {

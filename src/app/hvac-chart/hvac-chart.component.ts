@@ -105,13 +105,13 @@ export class HvacChartComponent implements OnInit {
 
         switch(id){
           case 1:
-            this.graphData.labels.splice(0,5);
-            this.graphData.datasets[0].data.splice(0,5);
-            this.graphData.datasets[1].data.splice(0,5);
-            this.graphData.datasets[2].data.splice(0,5);
-            this.graphData.datasets[3].data.splice(0,5);
-            this.graphData.datasets[4].data.splice(0,5);
-            this.graphData.datasets[5].data.splice(0,5);
+            this.graphData.labels.splice(0,1);
+            this.graphData.datasets[0].data.splice(0,1);
+            this.graphData.datasets[1].data.splice(0,1);
+            this.graphData.datasets[2].data.splice(0,1);
+            this.graphData.datasets[3].data.splice(0,1);
+            this.graphData.datasets[4].data.splice(0,1);
+            this.graphData.datasets[5].data.splice(0,1);
 
             this.hvacChart.update();
           break;
