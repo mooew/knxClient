@@ -31,4 +31,6 @@ export class HvacChartOpsComponent implements OnInit {
     //this.hvacChart.data.datasets[1].data.splice(0,5)
   }
 
+
+
 }

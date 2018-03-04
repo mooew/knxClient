@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Ets } from '../ets';
+import { Validators, FormGroup, FormBuilder, FormArray } from '@angular/forms';
+
+import { EtsModel, ets , Address } from '../ets-model';
+
 
 @Component({
   selector: 'app-ets',
@@ -8,27 +11,61 @@ import { Ets } from '../ets';
   styleUrls: ['./ets.component.css']
 })
 export class EtsComponent   {
+  etsForm: FormGroup; // <--- etsForm is of type FormGroup
+  //states = states;
+//  hero = hero;
+  ets = ets;
 
-  constructor() { }
-
-  powers = ['Really Smart', 'Super Flexible',
-              'Super Hot', 'Weather Changer'];
-
-  model = new Ets(1, '1/0/0', '1/0/1', '1/0/8');
-  submitted = false;
-//  forms = [ga_1, ga_2, ga_3];
-
-  onSubmit() { this.submitted = true; }
-
-  // TODO: Remove this when we're done
-  get diagnostic() { return JSON.stringify(this.model); }
-
-
-  public test():void {
-    console.log(this.model)
-    //hvacChart.data.labels.splice(0.5)
-    //this.hvacChart.data.datasets[0].data.splice(0,5)
-    //this.hvacChart.data.datasets[1].data.splice(0,5)
+  constructor(private fb: FormBuilder) { // <--- inject FormBuilder
+    this.createForm();
+    this.setAddresses(this.ets[0].addresses); //call for data
   }
+
+
+  createForm() {
+    this.etsForm = this.fb.group({
+      secretLairs: this.fb.array([]),  // <-- secretLairs as an empty FormArray
+
+    });
+  }
+
+  setAddresses(addresses: Address[]) {
+  const addressFGs = addresses.map(address => this.fb.group(address));
+  const addressFormArray = this.fb.array(addressFGs);
+  this.etsForm.setControl('secretLairs', addressFormArray);
+}
+get secretLairs(): FormArray {
+    return this.etsForm.get('secretLairs') as FormArray;
+
+  };
+
+  onSubmit() {
+    //alert('save');
+  this.ets[0].addresses = this.prepareSaveEts();
+  console.log(this.ets[0]);
+
+  //this.heroService.updateEts(this.ets).subscribe(/* error handling */);
+  //this.ngOnChanges();
+}
+
+prepareSaveEts() {
+  const formModel = this.etsForm.value;
+
+  // deep copy of form model lairs
+  const secretLairsDeepCopy: Address[] = formModel.secretLairs.map(
+    (address: Address) => Object.assign({}, address)
+  );
+
+
+  // return new `Hero` object containing a combination of original hero value(s)
+  // and deep copies of changed form model values
+  //const saveEts = {
+    //id: this.ets.id,
+    //name: formModel.name as string,
+    // addresses: formModel.secretLairs // <-- bad!
+    //addresses: secretLairsDeepCopy
+//  };
+  return secretLairsDeepCopy;
+}
 
 }
