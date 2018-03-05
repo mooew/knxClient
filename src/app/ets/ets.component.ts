@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 
 import { Validators, FormGroup, FormBuilder, FormArray } from '@angular/forms';
 
-import { EtsModel, ets , Address } from '../ets-model';
+import { EtsModel , Address } from '../ets-model';
 
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-ets',
@@ -14,12 +15,35 @@ export class EtsComponent   {
   etsForm: FormGroup; // <--- etsForm is of type FormGroup
   //states = states;
 //  hero = hero;
-  ets = ets;
+  ets: any;
 
-  constructor(private fb: FormBuilder) { // <--- inject FormBuilder
+  constructor(
+    private fb: FormBuilder,            // <--- inject FormBuilder
+    private dataService: DataService
+
+  ){
     this.createForm();
-    this.setAddresses(this.ets[0].addresses); //call for data
+    //this.setAddresses(this.ets[0].addresses); //call for data
   }
+
+
+  getEts():void{
+    this.dataService.getEtsData()
+      .subscribe(data => {
+        console.log(data)
+        this.setAddresses(data); //call for data
+
+    });
+  }
+
+  putEts(body: any):void{
+    this.dataService.putEtsData(body)
+      .subscribe(data => {
+        console.log(data)
+        //this.setAddresses(data); //call for data
+    });
+  }
+
 
 
   createForm() {
@@ -30,19 +54,29 @@ export class EtsComponent   {
   }
 
   setAddresses(addresses: Address[]) {
+    this.ets = addresses;
   const addressFGs = addresses.map(address => this.fb.group(address));
   const addressFormArray = this.fb.array(addressFGs);
   this.etsForm.setControl('secretLairs', addressFormArray);
+
+
 }
 get secretLairs(): FormArray {
     return this.etsForm.get('secretLairs') as FormArray;
 
   };
 
+
+  ngOnInit() {
+    this.getEts();
+
+  }
+
   onSubmit() {
     //alert('save');
-  this.ets[0].addresses = this.prepareSaveEts();
+  //this.ets[0].addresses = this.prepareSaveEts();
   console.log(this.ets[0]);
+  this.putEts(this.prepareSaveEts());
 
   //this.heroService.updateEts(this.ets).subscribe(/* error handling */);
   //this.ngOnChanges();

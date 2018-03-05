@@ -1,13 +1,13 @@
-<h2>Hero Detail</h2>
-<h3><i>A FormGroup with multiple FormControls</i></h3>
+<h3>Ets groupaddresses</h3>
+
 <form [formGroup]="etsForm" (ngSubmit)="onSubmit()" novalidate>
 
 
   <div formArrayName="secretLairs" class="well well-sm">
   <div *ngFor="let address of secretLairs.controls; let i=index" [formGroupName]="i" >
     <!-- The repeated address template -->
-    <h5>{{this.ets[0].addresses[i].name}}</h5>
-    
+    <h5>{{this.ets[i].name}}</h5>
+
       <div class="form-group">
         <label class="center-block">
           <input class="form-control" formControlName="ga">

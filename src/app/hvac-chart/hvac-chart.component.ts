@@ -29,13 +29,7 @@ export class HvacChartComponent implements OnInit {
     private socketService: SocketService,
   ) { }
 
-  getEts():void{
-    this.dataService.getEtsData()
-      .subscribe(data => {
 
-        console.log('get Ets ok')
-    });
-  }
 
   getData(): void {
     this.dataService.getData()
@@ -63,7 +57,7 @@ export class HvacChartComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getEts();
+
     this.getData();         //through http
     this.getDataPoint();    //through socket
 

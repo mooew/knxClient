@@ -28,9 +28,22 @@ export class DataService {
     );
   }
 
+
+
+
+
   getEtsData (): Observable<EtsType[]> {
     //console.log(this.http.get<DataPoint[]>(this.dataUrl))
     return this.http.get<EtsType[]>(this.dataUrl + 'getEts')
+    .pipe(
+      //tap(data => this.log(`fetched data`)),
+      catchError(this.handleError('getEtsData', []))
+    );
+  }
+
+  putEtsData (body: any): Observable<EtsType[]> {
+    //console.log(this.http.get<DataPoint[]>(this.dataUrl))
+    return this.http.put<EtsType[]>(this.dataUrl + 'getEts/all', body )
     .pipe(
       //tap(data => this.log(`fetched data`)),
       catchError(this.handleError('getEtsData', []))
