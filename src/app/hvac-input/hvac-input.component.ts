@@ -38,10 +38,10 @@ export class HvacInputComponent implements OnInit {
   ];
 
   thermoModes = [
-    {id: 0, text: 'off'},
-    {id: 1, text: 'heating'},
-    {id: 2, text: 'cooling'},
-    {id: 3, text: 'auto'},
+    {id: 0, text: 'auto'},
+    {id: 1, text: 'cooling only'},
+    {id: 2, text: 'heating only'},
+    //{id: 3, text: 'auto'},
   ];
 
 
@@ -63,6 +63,7 @@ export class HvacInputComponent implements OnInit {
       this.socketService.getUpdateDOM()
         .subscribe(data => {
           //do something with the data
+          //console.log("update" + data)
           switch (data.id){
             case 0:   //new temperature
             break;
@@ -70,10 +71,10 @@ export class HvacInputComponent implements OnInit {
               this.sp = data.inp;
             break;
             case 2:   //new SP mode
-
+              this.curSpMode = data.inp;
             break;
             case 3: //new thermo mode
-              this.curSpMode = data.inp;
+              this.curThMode = data.inp;
             break;
             };
         });

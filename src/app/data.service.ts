@@ -15,8 +15,8 @@ export class DataService {
     private http: HttpClient
   ) {}
 
-  //private dataUrl = 'http://10.0.211.155:9000/getTemperature';  // URL to web api
-  private dataUrl = 'http://localhost:9000/';  // URL to web api
+  private dataUrl = 'http://10.0.211.155:9000/';  // URL to web api
+  //private dataUrl = 'http://localhost:9000/';  // URL to web api
 
 
   getData (): Observable<DataPoint[]> {
