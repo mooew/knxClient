@@ -9,6 +9,8 @@ import { Chart } from 'chart.js';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+
+
 import {
   MatAutocompleteModule,
   MatButtonModule,
@@ -47,6 +49,7 @@ import {
 
 import { AppComponent } from './app.component';
 import { HvacChartComponent } from './hvac-chart/hvac-chart.component';
+import { HvacChart2Component } from './hvac-chart-2/hvac-chart-2.component';
 import { HvacInputComponent } from './hvac-input/hvac-input.component';
 import { AppRoutingModule }     from './app-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -59,6 +62,7 @@ import { HvacChartOpsComponent } from './hvac-chart-ops/hvac-chart-ops.component
   declarations: [
     AppComponent,
     HvacChartComponent,
+    HvacChart2Component,
     HvacInputComponent,
     DashboardComponent,
     EtsComponent,
@@ -76,6 +80,7 @@ import { HvacChartOpsComponent } from './hvac-chart-ops/hvac-chart-ops.component
     MatButtonModule, MatCheckboxModule,MatRadioModule,MatIconModule,MatFormFieldModule,
     ReactiveFormsModule, MatInputModule,MatSelectModule,
   ],
+ 
   providers: [DataService, SocketService, ],
   bootstrap: [AppComponent]
 })

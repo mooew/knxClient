@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-
 import { Chart, pattern } from 'chart.js';
 import * as moment from 'moment';
 
@@ -11,11 +10,11 @@ import { DataPoint } from '../hero';
 import * as graph from '../graph';
 
 @Component({
-  selector: 'app-hvac-chart',
-  templateUrl: './hvac-chart.component.html',
-  styleUrls: ['./hvac-chart.component.css']
+  selector: 'app-hvac-chart-2',
+  templateUrl: './hvac-chart-2.component.html',
+  styleUrls: ['./hvac-chart-2.component.css']
 })
-export class HvacChartComponent implements OnInit {
+export class HvacChart2Component implements OnInit {
 
     dataPoints: DataPoint[];
 
@@ -42,8 +41,8 @@ export class HvacChartComponent implements OnInit {
         this.graphData.datasets[1].data = this.dataPoints.map(dataPoint => dataPoint.sp);
         this.graphData.datasets[2].data = this.dataPoints.map(dataPoint => dataPoint.pi_heat);
         this.graphData.datasets[3].data = this.dataPoints.map(dataPoint => dataPoint.pi_cool);
-        this.graphData.datasets[6].data = this.dataPoints.map(dataPoint => dataPoint.pi_heat_2);
-        this.graphData.datasets[7].data = this.dataPoints.map(dataPoint => dataPoint.pi_cool_2);
+        //this.graphData.datasets[4].data = this.dataPoints.map(dataPoint => dataPoint.pi_heat_2);
+        //this.graphData.datasets[5].data = this.dataPoints.map(dataPoint => dataPoint.pi_cool_2);
         this.graphData.datasets[4].data = this.dataPoints.map(dataPoint => dataPoint.heat_act);
         this.graphData.datasets[5].data = this.dataPoints.map(dataPoint => dataPoint.cool_act);
         this.hvacChart.update();
@@ -65,7 +64,7 @@ export class HvacChartComponent implements OnInit {
 
 
 
-    const ctx = document.getElementById('myChart');
+    const ctx = document.getElementById('myChart2');
 
     this.hvacChart = new Chart(ctx, {
       type: 'line',
@@ -87,8 +86,6 @@ export class HvacChartComponent implements OnInit {
     this.graphData.datasets[3].data.push(data.pi_cool)
     this.graphData.datasets[4].data.push(data.heat_act)
     this.graphData.datasets[5].data.push(data.cool_act)
-    this.graphData.datasets[6].data.push(data.pi_heat_2)
-    this.graphData.datasets[7].data.push(data.pi_cool_2)
     this.hvacChart.update();
   }
 
@@ -120,8 +117,6 @@ export class HvacChartComponent implements OnInit {
             this.graphData.datasets[3].data.splice(0,1);
             this.graphData.datasets[4].data.splice(0,1);
             this.graphData.datasets[5].data.splice(0,1);
-            this.graphData.datasets[6].data.splice(0,1);
-            this.graphData.datasets[7].data.splice(0,1);
 
             this.hvacChart.update();
           break;
