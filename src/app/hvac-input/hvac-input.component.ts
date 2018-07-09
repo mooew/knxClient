@@ -3,6 +3,7 @@ import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 import { SocketService } from '../socket.service';
 import { ObservableMedia } from '@angular/flex-layout';
 import {FormControl, Validators} from '@angular/forms';
+
 //import { HvacChartComponent } from '../hvac-chart/hvac-chart.component';
 //import * as hvacChart from '../hvac-chart/hvac-chart.component';
 
@@ -29,6 +30,11 @@ export class HvacInputComponent implements OnInit {
   sp = 21;
   curSpMode: number;
   curThMode: number;
+  curOnOffMode: number;
+  //curWindowState: number = 0;
+
+  curWindowState: number = 0;
+  curPresenceState: number = 0;
 
   modes = [
     {id: 1, text: 'comfort'},
@@ -38,12 +44,16 @@ export class HvacInputComponent implements OnInit {
   ];
 
   thermoModes = [
-    {id: 0, text: 'off'},
-    {id: 1, text: 'heating'},
-    {id: 2, text: 'cooling'},
-    {id: 3, text: 'auto'},
+    {id: 0, text: 'auto'},
+    {id: 1, text: 'cooling only'},
+    {id: 2, text: 'heating only'},
+    //{id: 3, text: 'auto'},
   ];
 
+  onOffModes = [
+    {id: 0, text: 'off'},
+    {id: 1, text: 'on'},
+  ];
 
 
   addTemp(newTemp: any) {
@@ -63,17 +73,28 @@ export class HvacInputComponent implements OnInit {
       this.socketService.getUpdateDOM()
         .subscribe(data => {
           //do something with the data
+          console.log("update " + data.id + ' en ' +data.inp)
           switch (data.id){
             case 0:   //new temperature
+              console.log('update temp')
             break;
             case 1:   //new setpoint
               this.sp = data.inp;
+              //this.temp = data.inp;;
             break;
             case 2:   //new SP mode
-
+              this.curSpMode = data.inp;
             break;
             case 3: //new thermo mode
-              this.curSpMode = data.inp;
+              this.curThMode = data.inp;
+            break;
+            case 4: //new onoff mode
+              if(data.inp){
+                this.curOnOffMode = 1;
+              }else if(!data.inp){
+                this.curOnOffMode = 0;
+              }
+              
             break;
             };
         });
@@ -93,6 +114,24 @@ export class HvacInputComponent implements OnInit {
     console.log("th mode: " + this.curThMode);
     this.sendMessage(this.curThMode, 3);
   };
+
+  public onOnOffMode(): void{
+    console.log("on/off mode: " + this.curOnOffMode);
+    this.sendMessage(this.curOnOffMode, 4);
+  };
+
+  public onWindow(): void{
+    this.curWindowState = 1 - this.curWindowState;
+    console.log("window: " + this.curWindowState);
+    this.sendMessage(this.curWindowState, 5);
+  };
+
+  public onPresence(): void{
+    this.curPresenceState = 1 - this.curPresenceState;
+    console.log("window: " + this.curPresenceState);
+    this.sendMessage(this.curPresenceState, 6);
+  };
+
   public clear():void {
 
     };

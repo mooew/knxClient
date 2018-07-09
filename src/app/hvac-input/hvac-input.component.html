@@ -38,6 +38,14 @@
         </mat-select>
       </mat-form-field>
 
+      <mat-form-field>
+          <mat-select placeholder="select on off" [(ngModel)]="curOnOffMode" (change)="onOnOffMode()">
+            <mat-option *ngFor="let mode of onOffModes" [value]=mode.id>
+              {{mode.text}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
 
     </div>
     <!--
@@ -47,9 +55,18 @@
     </div>
   -->
 
+  <div>
+    <button mat-button-toggle-group (click)="onWindow()">window</button> status = {{curWindowState}}
+    <br>
+    <button mat-button-toggle-group (click)="onPresence()">presence</button> status = {{curPresenceState}}
+    
+    
+
+  </div>
 
 
 
+  
 
 
 </div>

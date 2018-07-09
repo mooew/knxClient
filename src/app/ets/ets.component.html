@@ -1,72 +1,28 @@
-<h3>
-  Ets group addresses
-</h3>
+<h3>Ets groupaddresses</h3>
 
-<div class="container">
-    <h1>ETS Form</h1>
-    <form (ngSubmit)="onSubmit()" #heroForm="ngForm">
-      {{diagnostic}}
+<form [formGroup]="etsForm" (ngSubmit)="onSubmit()" novalidate>
 
-      <div class="form-group">
-        <label for="ga_1">ga_1</label>
-        <input type="text" class="form-control" id="ga_1"
-               required
-               [(ngModel)]="model.ga_1" name="name">
-      </div>
+
+  <div formArrayName="secretLairs" class="well well-sm">
+  <div *ngFor="let address of secretLairs.controls; let i=index" [formGroupName]="i" >
+    <!-- The repeated address template -->
+    <h5>{{this.ets[i].name}}</h5>
 
       <div class="form-group">
-        <label for="ga_2">ga_2</label>
-        <input type="text"  class="form-control" id="ga_2"
-               [(ngModel)]="model.ga_2" name="ga_2">
+        <label class="center-block">
+          <input class="form-control" formControlName="ga">
+        </label>
       </div>
 
-      <div class="form-group">
-        <label for="ga_3">ga_3</label>
-        <input type="text"  class="form-control" id="ga_3"
-               [(ngModel)]="model.ga_3" name="ga_3">
-      </div>
 
-      
-
-      <button type="submit" class="btn btn-success">Submit</button>
-
-    </form>
+    <br>
+    <!-- End of the repeated address template -->
+  </div>
 </div>
+<button type="submit"
+  [disabled]="etsForm.pristine"
+  class="btn btn-success">Save</button>
 
-<button mat-button (click)="test()">test</button>
-<!--
-<div class="example-container">
-  <mat-form-field>
-    <input matInput #newGa1 placeholder="External temperature" value={{ga1}}>
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput placeholder="Setpoint input">
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput placeholder="Setpoint output">
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput placeholder="mode input">
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput placeholder="mode output">
-  </mat-form-field>
+</form>
 
-
-  <mat-form-field>
-    <input matInput placeholder="heating active">
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput placeholder="pi heating">
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput placeholder="cooling active">
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput placeholder="pi cooling">
-  </mat-form-field>
-
-<button mat-raised-button>Send GA</button>
-
-</div>
--->
+<p>heroForm value: {{ etsForm.value | json}}</p>

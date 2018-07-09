@@ -73,7 +73,33 @@ export const graphData = {
       spanGaps: true,
       yAxisID: "y-axis-4",
 
-    },
+    },{
+      label: "heat 2",
+      fill: false,
+      pointRadius: 0,
+      pointHitRadius: 5,
+      backgroundColor: 'rgb(255, 99, 132)',
+      borderColor: 'rgb(255, 99, 132)',
+      //data: this.data
+      data: [],    //here comes the data
+      borderDash: [10,5],
+      steppedLine: true,
+      spanGaps: true,
+      yAxisID: "y-axis-2",
+    },{
+      label: "cool 2",
+      fill: false,
+      pointRadius: 0,
+      pointHitRadius: 5,
+      backgroundColor: 'rgb(0, 177, 228)',
+      borderColor: 'rgb(0, 177, 228)',
+      //data: this.data
+      data: [],    //here comes the data
+      borderDash: [10,5],
+      steppedLine: true,
+      spanGaps: true,
+      yAxisID: "y-axis-3",
+    }
 
   ]
 
@@ -100,7 +126,7 @@ export const graphOptions = {
                   },
                   ticks: {
                     suggestedMin: 0,
-                    suggestedMax: 30
+                    suggestedMax: 25
                 }
               },{
                 //y-as 2
